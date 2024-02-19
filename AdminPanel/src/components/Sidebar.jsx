@@ -7,14 +7,17 @@ import {
     BsPeopleFill
 } from 'react-icons/bs'
 import { MdVaccines } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 function Sidebar({openSideBarToggle, OpenSideBar}){
     return(
         <aside id='sidebar' className={openSideBarToggle ? "sidebar-responsive": ""}>
             <div className='sidebar-title'>
-                <div className='sidebar-brand'>
-                    <BsHospital className='icon'/> ImmunTrack
-                </div>
+                <Link to="/home">
+                    <div className='sidebar-brand'>
+                        <BsHospital className='icon'/> ImmunTrack
+                    </div>
+                </Link>
                 <span className='icon close-icon' onClick={OpenSideBar}>X</span>
             </div>
 
@@ -50,6 +53,9 @@ function Sidebar({openSideBarToggle, OpenSideBar}){
                     </a>
                 </li>
             </ul>
+            <div>
+                <button className='logout-btn'>Logout</button>
+            </div>
         </aside>
     )
 }

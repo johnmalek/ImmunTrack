@@ -107,12 +107,33 @@ body {
   color: #9e9ea4;
 }
 
+.logout-btn {
+  display: block;
+  height: 45px;
+  width: 200px;
+  padding: 10px;
+  background-color: #3d82ed;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 20px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  position: absolute;
+  bottom: 0;
+}
+
+
 .sidebar-responsive {
   display: inline !important;
   position: absolute;
   /*
     we want the z-index of the sidebar higher so that
-    the charts are not showing over the sidebar 
+    the charts are not showing over the sidebar
     on small screens
   */
   z-index: 12 !important;
