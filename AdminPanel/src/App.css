@@ -57,6 +57,11 @@ body {
   display: none;
 }
 
+.login-page {
+  grid-area: main;
+  align-items: center;
+}
+
 /* End Header */
 
 /* Sidebar  */
@@ -205,12 +210,70 @@ body {
 }
 /* End Main */
 
-/* Admin Table */
+/* Login Page */
 
-.table-wrapper {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 410px;
   width: 100%;
-  margin-top: 100px;
 }
+
+.container .title {
+  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 500px;
+}
+
+form {
+  width: 100%;
+}
+
+.user-details,
+.input-box {
+  margin-bottom: 20px;
+}
+
+.details {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+form .button{
+  height: 45px;
+  margin: 45px 0;
+}
+
+form .button input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 3px;
+  background-color: #2e7d32;
+}
+
+/* End Login Page */
+
+/* Admin Table */
 
 .table {
   display: block;
