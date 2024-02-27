@@ -34,11 +34,6 @@ function Sidebar({openSideBarToggle, OpenSideBar}){
                 </li>
                 <li className='sidebar-list-item'>
                     <a href="">
-                        <BsPeopleFill className='icon' /> Categories
-                    </a>
-                </li>
-                <li className='sidebar-list-item'>
-                    <a href="">
                         <MdVaccines className='icon' /> Vaccine Inventory
                     </a>
                 </li>
