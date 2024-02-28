@@ -23,17 +23,17 @@ function Sidebar({openSideBarToggle, OpenSideBar}){
 
             <ul className='sidebar-list'>
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/home">
                         <BsFillArchiveFill className='icon' /> Dashboard
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/add_child">
                         <BsPeopleFill className='icon' /> Children
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/vaccine">
                         <MdVaccines className='icon' /> Vaccine Inventory
                     </a>
                 </li>
