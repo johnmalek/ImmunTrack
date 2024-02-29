@@ -37,8 +37,8 @@ function AddChild(){
                             <input type="text" placeholder="Mother's Phone No"/>
                         </div>
                         <div className="input-box">
-                            <span className="details">Location</span>
-                            <input type="text" placeholder="Location"/>
+                            <span className="details">Residence</span>
+                            <input type="text" placeholder="Residence"/>
                         </div>
                     </div>
                     <div className="button">
