@@ -304,6 +304,14 @@ form .button input{
   overflow-x: auto;
 }
 
+.table-wrapper .title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .table thead {
   color: 222;
 }
@@ -320,10 +328,6 @@ form .button input{
 
 .table tbody tr:hover {
   background-color: #eee;
-}
-
-.expand {
-  width: 100%;
 }
 
 .label {

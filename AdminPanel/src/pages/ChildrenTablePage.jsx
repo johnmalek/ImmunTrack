@@ -1,9 +1,9 @@
 import { useState } from "react";
+import ChildrenTable from "../components/ChildrenTable";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import Table from "../components/Table";
 
-function AdminTable() {
+function ChildrenTablePage() {
 
     const [openSideBarToggle, setOpenSideBarToggle] = useState(false)
 
@@ -14,9 +14,9 @@ function AdminTable() {
         <>
             <Sidebar openSideBarToggle={openSideBarToggle} OpenSideBar={OpenSideBar}/>
             <Header OpenSideBar={OpenSideBar}/>
-            <Table />
+            <ChildrenTable />
         </>
     )
 }
 
-export default AdminTable
+export default ChildrenTablePage
