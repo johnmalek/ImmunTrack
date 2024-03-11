@@ -1,15 +1,23 @@
 import React from "react";
 
-function Login(){
+function Signup(){
     return (
         <main className="main-container">
             <div className="container">
                 <div className="title">ImmunTrack</div>
-                <div className="title">Login</div>
+                <div className="title">Register</div>
                 <form action="#">
                     <div className="user-details">
                         <div className="input-box">
-                            <span className="details">Username</span>
+                            <span className="details">First Name</span>
+                            <input type="text" placeholder="Username"/>
+                        </div>
+                        <div className="input-box">
+                            <span className="details">Last Name</span>
+                            <input type="text" placeholder="Username"/>
+                        </div>
+                        <div className="input-box">
+                            <span className="details">Email</span>
                             <input type="text" placeholder="Username"/>
                         </div>
                         <div className="input-box">
@@ -18,15 +26,14 @@ function Login(){
                         </div>
                     </div>
                     <div className="button">
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Register" />
                     </div>
-                    <a href="#">Forgot Password?</a>
-                    <p>Don't have an account?</p>
-                    <a href="/signup">Sign up</a>
+                    <p>Already have an account?</p>
+                    <a href="/login">Login</a>
                 </form>
             </div>
         </main>
     )
 }
 
-export default Login
+export default Signup

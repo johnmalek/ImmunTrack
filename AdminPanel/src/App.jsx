@@ -8,6 +8,7 @@ import RegisterHealthWorkerPage from './pages/RegisterHealthWorkerPage'
 import ReportsPage from './pages/ReportsPage'
 import VaccinePage from './pages/VaccinePage'
 import VaccineTablePage from './pages/VaccineTablePage'
+import SignUpPage from './pages/SignUpPage'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/vaccine' element={<VaccinePage />} />
             <Route path='/healthworker' element={<RegisterHealthWorkerPage />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignUpPage />} />
           </Routes>
         </BrowserRouter>
       </div>

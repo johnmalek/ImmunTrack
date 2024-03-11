@@ -28,12 +28,12 @@ function Sidebar({openSideBarToggle, OpenSideBar}){
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="/add_child">
+                    <a href="/children_table">
                         <BsPeopleFill className='icon' /> Children
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="/vaccine">
+                    <a href="/vaccine_table">
                         <MdVaccines className='icon' /> Vaccine Inventory
                     </a>
                 </li>
