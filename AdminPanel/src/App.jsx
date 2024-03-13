@@ -18,7 +18,7 @@ function App() {
       <div className='grid-container'>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            {/* <Route path='/' element={<HomePage />} /> */}
             <Route path='/home' element={<HomePage />} />
             <Route path='/children_table' element={<ChildrenTablePage />} />
             <Route path='/vaccine_table' element={<VaccineTablePage />} />
@@ -26,7 +26,7 @@ function App() {
             <Route path='/add_child' element={<AddChildPage />} />
             <Route path='/vaccine' element={<VaccinePage />} />
             <Route path='/healthworker' element={<RegisterHealthWorkerPage />} />
-            <Route path='/login' element={<LoginPage />} />
+            <Route path='/' element={<LoginPage />} />
             <Route path='/signup' element={<SignUpPage />} />
           </Routes>
         </BrowserRouter>
