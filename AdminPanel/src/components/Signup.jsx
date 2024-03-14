@@ -23,7 +23,7 @@ function Signup(){
             });
             console.log(response.data);
             setMessage(response.data.message);
-            navigate("/login");
+            navigate("/");
         } catch (err){
             setMessage(err.message);
         }
@@ -59,6 +59,7 @@ function Signup(){
                     <p>Already have an account?</p>
                     <a href="/">Login</a>
                 </form>
+                {message && <p>{message}</p>}
             </div>
         </main>
     )
