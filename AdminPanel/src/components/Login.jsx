@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import { BsHospital } from "react-icons/bs";
+import { BsHospital,BsGoogle } from "react-icons/bs";
 
 function Login(){
 
@@ -14,15 +14,14 @@ function Login(){
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post(API_ENDPOINT, {
+            const data = await axios.post(API_ENDPOINT, {
                 email: email,
                 password: password,
-            });
-            setMessage("Login successful", response.data);
+            }, {withCredentials: true});
+
             navigate("/home");
         } catch (errole){
-            console.error("Login failed", error.message);
-            setMessage("Invalid email or password. Try again");
+            console.error(error.message);
         }
     };
 
@@ -39,7 +38,7 @@ function Login(){
                     <div className="user-details">
                         <div className="input-box">
                             <span className="details">Email</span>
-                            <input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                            <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Password</span>
@@ -52,6 +51,8 @@ function Login(){
                     <a href="#">Forgot Password?</a>
                     <p>Don't have an account?</p>
                     <a href="/signup">Sign up</a>
+                    <p>Or login with:</p>
+                    <BsGoogle />
                 </form>
                 {message && <p>{message}</p>}
             </div>

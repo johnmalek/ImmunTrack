@@ -25,7 +25,7 @@ function Signup(){
             setMessage(response.data.message);
             navigate("/");
         } catch (err){
-            setMessage(err.message);
+            setMessage(err.response.data.message);
         }
     };
 
@@ -46,7 +46,7 @@ function Signup(){
                         </div>
                         <div className="input-box">
                             <span className="details">Email</span>
-                            <input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                            <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Password</span>
