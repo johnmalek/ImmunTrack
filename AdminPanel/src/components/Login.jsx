@@ -34,8 +34,10 @@ function Login(){
         .then(response => response.json())
         .then(json => {
             console.log(json)
+            setMessage(json.message)
             if (json?.token){
                 dispatch(setter(json.token))
+                setMessage(json.message)
                 navigate("/home")
             }
         })
@@ -53,6 +55,7 @@ function Login(){
                         <BsHospital className='icon'/> ImmunTrack
                 </div>
                 <div className="title">Login</div>
+                {message && <p className="message">{message}</p>}
                 <form action="#">
                     <div className="user-details">
                         <div className="input-box">
@@ -73,7 +76,6 @@ function Login(){
                     <p>Or login with:</p>
                     <BsGoogle />
                 </form>
-                {message && <p>{message}</p>}
             </div>
         </main>
     )
