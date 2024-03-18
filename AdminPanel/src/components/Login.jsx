@@ -1,28 +1,47 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BsHospital,BsGoogle } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import {setter} from '../tokenSlice'
+
 
 function Login(){
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/auth/user_login";
+
+    const token = useSelector((state) => state.token.value);
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        try {
-            const data = await axios.post(API_ENDPOINT, {
-                email: email,
-                password: password,
-            }, {withCredentials: true});
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-            navigate("/home");
-        } catch (errole){
-            console.error(error.message);
+        const payload ={
+            email: email,
+            password: password
         }
+
+        fetch(API_ENDPOINT, {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {'Content-type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json)
+            if (json?.token){
+                dispatch(setter(json.token))
+                navigate("/home")
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     };
 
 

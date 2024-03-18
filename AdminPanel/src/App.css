@@ -6,6 +6,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.text-error{
+  font-weight: 600;
+  color: red;
+}
+
 /* icon */
 
 .icon {
@@ -302,9 +307,11 @@ form .button input{
   border-radius: 10px;
   white-space: nowrap;
   width: 100em;
-  max-width: 80%;
+  max-width: 120%;
   margin: auto;
+  margin-left: 50px;
   overflow-x: auto;
+  overflow-y: auto;
 }
 
 .table-wrapper .title {

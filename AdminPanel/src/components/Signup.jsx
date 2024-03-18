@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
+import { BsHospital } from "react-icons/bs";
+import {useForm} from 'react-hook-form';
 
 function Signup(){
 
@@ -13,45 +15,97 @@ function Signup(){
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleRegister = async () => {
-        try {
-            const response = await axios.post(API_ENDPOINT, {
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                password: password,
-            });
-            console.log(response.data);
-            setMessage(response.data.message);
-            navigate("/");
-        } catch (err){
-            setMessage(err.response.data.message);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+    }
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        // try {
+        //     const response = await axios.post(API_ENDPOINT, {
+        //         firstname: firstname,
+        //         lastname: lastname,
+        //         email: email,
+        //         password: password,
+        //     });
+        //     console.log(response.data);
+        //     setMessage(response.data.message);
+        //     navigate("/");
+        // } catch (err){
+        //     setMessage(err.response.data.message);
+        // }
+
+        const payload = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password
         }
+
+        fetch(API_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: { 'Content-type': 'application/json' }
+        }).then(response => response.json())
+        .then(json => {
+            navigate('/')
+            console.log(json)
+        }).catch(err => {
+            console.log(err)
+        })
     };
+
 
     return (
         <main className="main-container">
             <div className="container">
-                <div className="title">ImmunTrack</div>
+                <div className='sidebar-brand'>
+                        <BsHospital className='icon'/> ImmunTrack
+                </div>
                 <div className="title">Register</div>
-                <form action="#">
+                <form action="#" onSubmit={handleSubmit(onSubmit)}>
                     <div className="user-details">
                         <div className="input-box">
                             <span className="details">First Name</span>
-                            <input type="text" onChange={(e) => setFirstname(e.target.value)} placeholder="First Name"/>
+                            <input type="text"
+                                    placeholder="First Name"
+                                    onChange={(e) => setFirstname(e.target.value)}
+                            />
                         </div>
+                        {errors.firstName && <p className="text-error">First Name max length is 20</p>}
                         <div className="input-box">
                             <span className="details">Last Name</span>
-                            <input type="text" onChange={(e) => setLastname(e.target.value)} placeholder="Last Name"/>
+                            <input type="text"
+                                    placeholder="Last Name"
+                                    onChange={(e) => setLastname(e.target.value)}
+                            />
                         </div>
+                        {errors.firstName && <p className="text-error">Last Name max length is 20</p>}
                         <div className="input-box">
                             <span className="details">Email</span>
-                            <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                            <input type="email"
+                                    placeholder="Email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
+                        {errors.email && <p className="text-error">Please check the Email</p>}
                         <div className="input-box">
                             <span className="details">Password</span>
-                            <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
+                            <input type="password"
+                                    placeholder="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                            />
                         </div>
+                        {errors.password && <p className="text-error">Password requirements: 
+                            <ul>
+                                <li>Must contain at least one digit (0-9)</li>
+                                <li>Must contain at least one letter (a-z or A-Z)</li>
+                                <li>Must contain at least one special character (!@#$%^&*)</li>
+                                <li>Must be between 8 and 20 characters long</li>
+                                <li>Only allowed characters are letters (a-z or A-Z), digits (0-9), and special characters (!@#$%^&*)</li>
+                            </ul>
+                        </p>}
                     </div>
                     <div className="button">
                         <input type="submit" onClick={handleRegister} value="Register" />

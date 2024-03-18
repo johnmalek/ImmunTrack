@@ -17,7 +17,11 @@ import {
     YAxis
 } from 'recharts';
 
+import { useSelector } from "react-redux";
+
 function Home(){
+
+    const token = useSelector((state) => state.token.value)
 
     const data = [
         {
