@@ -10,6 +10,10 @@ import { MdVaccines } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
 function Sidebar({openSideBarToggle, OpenSideBar}){
+
+    const LOGOUT_ENDPOINT = "http://localhost:8083/api/v1/auth/logout";
+
+
     return(
         <aside id='sidebar' className={openSideBarToggle ? "sidebar-responsive": ""}>
             <div className='sidebar-title'>
