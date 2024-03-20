@@ -18,10 +18,15 @@ import {
 } from 'recharts';
 
 import { useSelector } from "react-redux";
+import { useAuth } from "../provider/authProvider";
+import { jwtDecode } from "jwt-decode";
 
 function Home(){
 
-    const token = useSelector((state) => state.token.value)
+    // const token = useSelector((state) => state.token.value)
+    const {token} = useAuth();
+
+    const user = jwtDecode(token);
 
     const data = [
         {
@@ -120,6 +125,7 @@ function Home(){
         <main className="main-container">
             <div className="main-title">
                 <h3>ADMIN DASHBOARD</h3>
+                <h3>{user.sub}</h3>
             </div>
             <div className="main-cards">
                 <div className="card">
