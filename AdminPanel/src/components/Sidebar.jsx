@@ -53,7 +53,9 @@ function Sidebar({openSideBarToggle, OpenSideBar}){
                 </li>
             </ul>
             <div>
-                <button className='logout-btn'>Logout</button>
+                <a href="/logout">
+                    <button className='logout-btn'>Logout</button>
+                </a>
             </div>
         </aside>
     )

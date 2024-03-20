@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import MyDatePicker from "./MyDatePicker";
 import MyDatePicker1 from "./MyDatePicker1";
 
 function Reports() {
+
+    const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/add_report";
+
+    const [child_name, setChildName] = useState();
+    const [vaccine_name, setVaccineName] = useState();
+    const [date_administered, setDateAdministered] = useState();
+    const [next_dose_date, setNextDoseDate] = useState();
+    const [remarks, setRemarks] = useState();
+    const [message, setMessage] = useState();
+
+    const handleAddReport = async (e) => {
+        e.preventDefault();
+
+
+        const payload = {
+            child_name: child_name,
+            vaccine_name: vaccine_name,
+            date_administered: date_administered,
+            next_dose_date: next_dose_date,
+            remarks: remarks
+        }
+
+        fetch(API_ENDPOINT, {
+            method: "post",
+            body: JSON.stringify(payload),
+            headers: {"Content-type": "multipart/form-data"}
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
     return (
         <main className="main-container">
             <div className="container">
@@ -11,19 +48,23 @@ function Reports() {
                     <div className="user-details">
                         <div className="input-box">
                             <span className="details">Child Name</span>
-                            <input type="text" placeholder="Child Name"/>
+                            <input type="text" onChange={(e) => setChildName(e.target.value)} placeholder="Child Name"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Vaccine Administered</span>
-                            <input type="text" placeholder="Vaccine Administered"/>
+                            <input type="text" onChange={(e) => setChildName(e.target.value)} placeholder="Vaccine Administered"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Date Administered</span>
-                            <MyDatePicker />
+                            <input type="text" onChange={(e) => setDateAdministered(e.target.value)} placeholder="Date Administered"/>
+                        
+                            {/* <MyDatePicker onChange={(e) => setDateAdministered(e.target.value)} /> */}
                         </div>
                         <div className="input-box">
                             <span className="details">Next Dose Date</span>
-                            <MyDatePicker1 />
+                            <input type="text" onChange={(e) => setChildName(e.target.value)} placeholder="Vaccine Administered"/>
+                        
+                            {/* <MyDatePicker1 onChange={(e) => setNextDoseDate(e.target.value)}/> */}
                         </div>
                         <div className="input-box">
                             <span className="details">Compiled By</span>
@@ -31,11 +72,11 @@ function Reports() {
                         </div>
                         <div className="input-box">
                             <span className="details">Remarks</span>
-                            <input type="textarea" placeholder="Remarks"/>
+                            <input type="textarea" rows="10" cols="30" onChange={(e) => setRemarks(e.target.value)} placeholder="Remarks"/>
                         </div>
                     </div>
                     <div className="button">
-                        <input type="submit" value="Submit" />
+                        <input type="submit" onClick={handleAddReport} value="Submit" />
                     </div>
                 </form>
             </div>

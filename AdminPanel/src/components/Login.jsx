@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BsHospital,BsGoogle } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import {setter} from '../tokenSlice'
+import { useAuth } from "../provider/authProvider";
 
 
 function Login(){
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/auth/user_login";
 
-    const token = useSelector((state) => state.token.value);
-    const dispatch = useDispatch();
+    const {setToken} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -36,7 +33,7 @@ function Login(){
             console.log(json)
             setMessage(json.message)
             if (json?.token){
-                dispatch(setter(json.token))
+                setToken(json.token)
                 setMessage(json.message)
                 navigate("/home")
             }
@@ -50,7 +47,6 @@ function Login(){
     return (
         <main className="main-container">
             <div className="container">
-                {/* <div className="title">ImmunTrack</div> */}
                 <div className='sidebar-brand'>
                         <BsHospital className='icon'/> ImmunTrack
                 </div>

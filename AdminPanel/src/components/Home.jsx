@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     BsFillBellFill,
     BsPeopleFill
@@ -68,7 +68,53 @@ function Home(){
         },
     ];
 
+    const API_ENDPOINT_1 = "http://localhost:8083/api/v1/health_care/children_count";
+    const API_ENDPOINT_2 = "http://localhost:8083/api/v1/health_care/vaccine_count";
+    const API_ENDPOINT_3 = "http://localhost:8083/api/v1/health_care/report_count";
 
+    const [childNum, setChildNum] = useState();
+    const [vaccineNum, setVaccineNum] = useState();
+    const [reportNum, setReportNum] = useState();
+
+
+    fetch(API_ENDPOINT_1, {
+        method: "get",
+        headers: {"Content-type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+        setChildNum(json.num)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    fetch(API_ENDPOINT_2, {
+        method: "get",
+        headers: {"Content-type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+        setVaccineNum(json.num)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    fetch(API_ENDPOINT_3, {
+        method: "get",
+        headers: {"Content-type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+        setReportNum(json.num)
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
     return (
         <main className="main-container">
@@ -81,21 +127,21 @@ function Home(){
                         <h3>Vaccines</h3>
                         <MdVaccines className='card-icon' />
                     </div>
-                    <h1>300</h1>
+                    <h1>{vaccineNum}</h1>
                 </div>
                 <div className="card">
                     <div className="card-inner">
                         <h3>Children</h3>
                         <BsPeopleFill className='card-icon' />
                     </div>
-                    <h1>12</h1>
+                    <h1>{childNum}</h1>
                 </div>
                 <div className="card">
                     <div className="card-inner">
                         <h3>Reports</h3>
                         <BsPeopleFill className='card-icon' />
                     </div>
-                    <h1>33</h1>
+                    <h1>{reportNum}</h1>
                 </div>
                 <div className="card">
                     <div className="card-inner">

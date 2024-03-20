@@ -22,20 +22,6 @@ function Signup(){
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // try {
-        //     const response = await axios.post(API_ENDPOINT, {
-        //         firstname: firstname,
-        //         lastname: lastname,
-        //         email: email,
-        //         password: password,
-        //     });
-        //     console.log(response.data);
-        //     setMessage(response.data.message);
-        //     navigate("/");
-        // } catch (err){
-        //     setMessage(err.response.data.message);
-        // }
-
         const payload = {
             firstname: firstname,
             lastname: lastname,
