@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import MyDatePicker from "./MyDatePicker";
 import MyDatePicker1 from "./MyDatePicker1";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../provider/authProvider";
 
 function Reports() {
 
@@ -11,11 +13,11 @@ function Reports() {
     const [date_administered, setDateAdministered] = useState();
     const [next_dose_date, setNextDoseDate] = useState();
     const [remarks, setRemarks] = useState();
-    const [message, setMessage] = useState();
+    const navigate = useNavigate();
+    const {token} = useAuth();
 
     const handleAddReport = async (e) => {
         e.preventDefault();
-
 
         const payload = {
             child_name: child_name,
@@ -28,10 +30,14 @@ function Reports() {
         fetch(API_ENDPOINT, {
             method: "post",
             body: JSON.stringify(payload),
-            headers: {"Content-type": "multipart/form-data"}
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${token}`    
+            }
         })
         .then(response => response.json())
         .then(json => {
+            // navigate("/reports")            
             console.log(json)
         })
         .catch(err => {
@@ -52,7 +58,7 @@ function Reports() {
                         </div>
                         <div className="input-box">
                             <span className="details">Vaccine Administered</span>
-                            <input type="text" onChange={(e) => setChildName(e.target.value)} placeholder="Vaccine Administered"/>
+                            <input type="text" onChange={(e) => setVaccineName(e.target.value)} placeholder="Vaccine Administered"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Date Administered</span>
@@ -62,13 +68,9 @@ function Reports() {
                         </div>
                         <div className="input-box">
                             <span className="details">Next Dose Date</span>
-                            <input type="text" onChange={(e) => setChildName(e.target.value)} placeholder="Vaccine Administered"/>
+                            <input type="text" onChange={(e) => setNextDoseDate(e.target.value)} placeholder="Vaccine Administered"/>
                         
                             {/* <MyDatePicker1 onChange={(e) => setNextDoseDate(e.target.value)}/> */}
-                        </div>
-                        <div className="input-box">
-                            <span className="details">Compiled By</span>
-                            <input type="text" placeholder="Compiled By"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Remarks</span>

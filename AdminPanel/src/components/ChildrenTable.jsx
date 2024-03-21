@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
 
 function ChildrenTable(){
 
+    const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_children";
+
+    const [children, setChildren] = useState();
+    
+
+    fetch(API_ENDPOINT, {
+        method: "get",
+        headers: {"Content-type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(json => {
+        if(json?.children){
+            setChildren(json.children)
+            console.log(json.children)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
     return (
         <>
@@ -14,9 +33,11 @@ function ChildrenTable(){
                             <tr>
                                 <th>First Name</th>
                                 <th className='expand'>Last Name</th>
+                                <th>Date of Birth</th>
                                 <th>Mother's Name</th>
+                                <th>Mother's ID No</th>
                                 <th>Mother's Phone</th>
-                                <th>Residence</th>
+                                <th>Location</th>
                                 <th>Vaccination Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -24,44 +45,14 @@ function ChildrenTable(){
                         <tbody>
                             <tr>
                                 <td>John</td>
-                                <td>Doe</td>
-                                <td>Jane</td>
-                                <td>0712345678</td>
-                                <td>Kakuma 1</td>
+                                <td>Malek</td>
+                                <td>1995-3-13</td>
+                                <td>Lony</td>
+                                <td>10177780</td>
+                                <td>0702766735</td>
+                                <td>Juja</td>
                                 <td>
                                     <span className='label label-live'>Live</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jane</td>
-                                <td>Dong</td>
-                                <td>Susan</td>
-                                <td>0712345678</td>
-                                <td>Kakuma 2</td>
-                                <td>
-                                    <span className='label label-draft'>Draft</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ann</td>
-                                <td>Jok</td>
-                                <td>Peris</td>
-                                <td>0712345678</td>
-                                <td>Kakuma 3</td>
-                                <td>
-                                    <span className='label label-error'>Error</span>
                                 </td>
                                 <td>
                                     <span className='actions'>
