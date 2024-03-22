@@ -37,7 +37,7 @@ function Reports() {
         })
         .then(response => response.json())
         .then(json => {
-            // navigate("/reports")            
+            navigate("/home")            
             console.log(json)
         })
         .catch(err => {

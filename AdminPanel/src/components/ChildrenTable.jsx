@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
 
 function ChildrenTable(){
@@ -8,20 +8,22 @@ function ChildrenTable(){
     const [children, setChildren] = useState();
     
 
-    fetch(API_ENDPOINT, {
-        method: "get",
-        headers: {"Content-type": "application/json"}
-    })
-    .then(response => response.json())
-    .then(json => {
-        if(json?.children){
-            setChildren(json.children)
-            console.log(json.children)
-        }
-    })
-    .catch(err => {
-        console.log(err)
-    })
+    useEffect(() => {
+        fetch(API_ENDPOINT, {
+            method: "get",
+            headers: {"Content-type": "application/json"}
+        })
+        .then(response => response.json())
+        .then(json => {
+            if(json?.children){
+                setChildren(json.children)
+                console.log(json.children)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }, []);
 
     return (
         <>
@@ -31,6 +33,7 @@ function ChildrenTable(){
                     <table className='table'>
                         <thead>
                             <tr>
+                                <th>S/n</th>
                                 <th>First Name</th>
                                 <th className='expand'>Last Name</th>
                                 <th>Date of Birth</th>
@@ -43,24 +46,27 @@ function ChildrenTable(){
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Malek</td>
-                                <td>1995-3-13</td>
-                                <td>Lony</td>
-                                <td>10177780</td>
-                                <td>0702766735</td>
-                                <td>Juja</td>
-                                <td>
-                                    <span className='label label-live'>Live</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
+                            {children && children.map((child, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{child.firstname}</td>
+                                    <td>{child.lastname}</td>
+                                    <td>{child.dob}</td>
+                                    <td>{child.mother_name}</td>           
+                                    <td>{child.mother_id_no}</td>
+                                    <td>{child.mother_phone_no}</td>
+                                    <td>{child.location}</td>
+                                    <td>
+                                        <span className='label label-live'>Live</span>
+                                    </td>
+                                    <td>
+                                        <span className='actions'>
+                                            <BsFillTrashFill className='delete-btn'/>
+                                            <BsFillPencilFill />
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
 
 function VaccineTable() {
+
+    const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_vaccines";
+
+    const [vaccines, setVaccines] = useState();
+
+    useEffect(() => {
+        fetch(API_ENDPOINT, {
+            method: "get",
+            headers: {"Content-type": "application/json"}
+        })
+        .then(response => response.json())
+        .then(json => {
+            if(json?.vaccines){
+                setVaccines(json.vaccines)
+                console.log(json.vaccines)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }, []);
+
     return (
         <>
             <main className='main-container'>
@@ -10,6 +32,7 @@ function VaccineTable() {
                     <table className='table'>
                         <thead>
                             <tr>
+                                <th>S/n</th>
                                 <th>Name</th>
                                 <th className='expand'>Manufacturer</th>
                                 <th>Batch No</th>
@@ -20,54 +43,25 @@ function VaccineTable() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Vaccine 1</td>
-                                <td>Moderna</td>
-                                <td>0001</td>
-                                <td>5/05/2024</td>
-                                <td>500ml</td>
-                                <td>
-                                    <span className='label label-live'>Live</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Vaccine 2</td>
-                                <td>Astazeneca</td>
-                                <td>0002</td>
-                                <td>15/05/2024</td>
-                                <td>800ml</td>
-                                <td>
-                                    <span className='label label-draft'>Draft</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Vaccine 3</td>
-                                <td>Johnson & Johnson</td>
-                                <td>0003</td>
-                                <td>25/05/2024</td>
-                                <td>400ml</td>
-                                <td>
-                                    <span className='label label-error'>Error</span>
-                                </td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillTrashFill className='delete-btn'/>
-                                        <BsFillPencilFill />
-                                    </span>
-                                </td>
-                            </tr>
+                        {vaccines && vaccines.map((vaccine, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{vaccine.vaccineName}</td>
+                                    <td>{vaccine.manufacturer}</td>
+                                    <td>{vaccine.batchNo}</td>
+                                    <td>{vaccine.expiryDate}</td>
+                                    <td>{vaccine.quantity}</td>
+                                    <td>
+                                        <span className='label label-live'>Live</span>
+                                    </td>
+                                    <td>
+                                        <span className='actions'>
+                                            <BsFillTrashFill className='delete-btn'/>
+                                            <BsFillPencilFill />
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
