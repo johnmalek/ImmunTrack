@@ -11,6 +11,7 @@ import RegisterHealthWorkerPage from "./RegisterHealthWorkerPage";
 import LoginPage from "./LoginPage";
 import VaccineTablePage from "./VaccineTablePage";
 import LogoutPage from "./LogoutPage";
+import SettingsPage from "./SettingsPage";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -56,6 +57,10 @@ const Routes = () => {
           {
             path: "/vaccine",
             element: <VaccinePage />,
+          },
+          {
+            path: "/settings",
+            element: <SettingsPage />,
           },
         {
           path: "/healthworker",

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { json, useNavigate } from 'react-router-dom';
 import { BsHospital } from "react-icons/bs";
 import {useForm} from 'react-hook-form';
