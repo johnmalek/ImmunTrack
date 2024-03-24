@@ -4,6 +4,7 @@ import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
 function VaccineTable() {
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_vaccines";
+    const DELETE_ENDPOINT = "http://localhost:8083/api/v1/health_care/delete_vaccine";
 
     const [vaccines, setVaccines] = useState();
 
@@ -23,6 +24,26 @@ function VaccineTable() {
             console.log(err)
         });
     }, []);
+
+    const deleteVaccine = (index) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this vaccine record?");
+        if(confirmDelete){
+            const vaccineId = vaccines[index].id;
+            fetch(`${DELETE_ENDPOINT}/${vaccineId}`, {
+                method: "delete"
+            })
+            .then(response => {
+                if (response.ok) {
+                    const updatedVaccines = [...vaccines];
+                    updatedVaccines.splice(index, 1);
+                    setVaccines(updatedVaccines);
+                    alert("vaccine record deleted successfully");
+                }
+            })
+            .catch(error => console.error('Error deleting vaccine:', error));
+        }
+    };
+
 
     return (
         <>
@@ -56,7 +77,7 @@ function VaccineTable() {
                                     </td>
                                     <td>
                                         <span className='actions'>
-                                            <BsFillTrashFill className='delete-btn'/>
+                                            <BsFillTrashFill className='delete-btn' onClick={() => deleteVaccine(index)}/>
                                             <BsFillPencilFill />
                                         </span>
                                     </td>

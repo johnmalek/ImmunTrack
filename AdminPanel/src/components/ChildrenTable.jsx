@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function ChildrenTable(){
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_children";
+    const DELETE_ENDPOINT = "http://localhost:8083/api/v1/health_care/delete_child";
+    const UPDATE_ENDPOINT = "http://localhost:8083/api/v1/health_care/update_child_info/";
 
     const [children, setChildren] = useState();
-    
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(API_ENDPOINT, {
@@ -24,6 +27,25 @@ function ChildrenTable(){
             console.log(err)
         });
     }, []);
+
+    const deleteChild = (index) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this child record?");
+        if(confirmDelete){
+            fetch(DELETE_ENDPOINT + `/${children[index].id}`, {
+                method: "delete"
+            })
+            .then(response => {
+                if (response.ok) {
+                    const updatedChildren = [...children];
+                    updatedChildren.splice(index, 1);
+                    setChildren(updatedChildren);
+                    alert("child record deleted successfully");
+                }
+            })
+            .catch(error => console.error('Error deleting child:', error));
+        }
+    };
+
 
     return (
         <>
@@ -61,8 +83,10 @@ function ChildrenTable(){
                                     </td>
                                     <td>
                                         <span className='actions'>
-                                            <BsFillTrashFill className='delete-btn'/>
-                                            <BsFillPencilFill />
+                                            <BsFillTrashFill className='delete-btn' onClick={() => deleteChild(index)}/>
+                                            <a href="/update_child">
+                                                <BsFillPencilFill />
+                                            </a>
                                         </span>
                                     </td>
                                 </tr>
