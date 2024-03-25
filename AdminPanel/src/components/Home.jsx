@@ -16,10 +16,11 @@ import {
     XAxis,
     YAxis
 } from 'recharts';
-
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth } from "../provider/authProvider";
 import { jwtDecode } from "jwt-decode";
+import { Button } from "flowbite-react";
 
 function Home(){
 
@@ -27,6 +28,8 @@ function Home(){
     const {token} = useAuth();
 
     const user = jwtDecode(token);
+
+    const navigate = useNavigate();
 
     const data = [
         {
@@ -128,21 +131,21 @@ function Home(){
                 <h3>{user.sub}</h3>
             </div>
             <div className="main-cards">
-                <div className="card">
+                <div className="card" onClick={() => navigate("/vaccine_table")}>
                     <div className="card-inner">
                         <h3>Vaccines</h3>
-                        <MdVaccines className='card-icon' />
+                        <MdVaccines className='card-icon'  />
                     </div>
                     <h1>{vaccineNum}</h1>
                 </div>
-                <div className="card">
+                <div className="card" onClick={() => navigate("/children_table")}>
                     <div className="card-inner">
                         <h3>Children</h3>
                         <BsPeopleFill className='card-icon' />
                     </div>
                     <h1>{childNum}</h1>
                 </div>
-                <div className="card">
+                <div className="card" onClick={() => navigate("/report")}>
                     <div className="card-inner">
                         <h3>Reports</h3>
                         <BsPeopleFill className='card-icon' />
@@ -154,7 +157,7 @@ function Home(){
                         <h3>Alerts</h3>
                         <BsFillBellFill className='card-icon' />
                     </div>
-                    <h1>42</h1>
+                    <h1>0</h1>
                 </div>
             </div>
             <div className="charts">

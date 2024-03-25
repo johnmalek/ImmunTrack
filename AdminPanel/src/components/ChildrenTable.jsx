@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ChildrenTable(){
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_children";
     const DELETE_ENDPOINT = "http://localhost:8083/api/v1/health_care/delete_child";
-    const UPDATE_ENDPOINT = "http://localhost:8083/api/v1/health_care/update_child_info/";
 
     const [children, setChildren] = useState();
     const navigate = useNavigate();
@@ -46,6 +45,7 @@ function ChildrenTable(){
         }
     };
 
+    
 
     return (
         <>
@@ -79,14 +79,12 @@ function ChildrenTable(){
                                     <td>{child.mother_phone_no}</td>
                                     <td>{child.location}</td>
                                     <td>
-                                        <span className='label label-live'>Live</span>
+                                        <span className='label label-live'>Ongoing</span>
                                     </td>
                                     <td>
                                         <span className='actions'>
                                             <BsFillTrashFill className='delete-btn' onClick={() => deleteChild(index)}/>
-                                            <a href="/update_child">
-                                                <BsFillPencilFill />
-                                            </a>
+                                            <BsFillPencilFill className='edit-btn' onClick={() => navigate(`/update_child/${child.id}`)}/>
                                         </span>
                                     </td>
                                 </tr>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
+import { useNavigate, useParams } from "react-router-dom";
 
 function VaccineTable() {
 
     const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/all_vaccines";
     const DELETE_ENDPOINT = "http://localhost:8083/api/v1/health_care/delete_vaccine";
+    const navigate = useNavigate();
 
     const [vaccines, setVaccines] = useState();
 
@@ -78,7 +80,7 @@ function VaccineTable() {
                                     <td>
                                         <span className='actions'>
                                             <BsFillTrashFill className='delete-btn' onClick={() => deleteVaccine(index)}/>
-                                            <BsFillPencilFill />
+                                            <BsFillPencilFill className='edit-btn' onClick={() => navigate(`/update_vaccine/${vaccine.id}`)}/>
                                         </span>
                                     </td>
                                 </tr>

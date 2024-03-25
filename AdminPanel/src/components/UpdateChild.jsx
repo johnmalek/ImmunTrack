@@ -1,88 +1,102 @@
-import React, { useState } from "react"
-import { json, useNavigate } from "react-router-dom";
-import children from './ChildrenTable'
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateChild(){
 
-    const API_ENDPOINT = "http://localhost:8083/api/v1/health_care/update_child";
-
-    const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
-    const [sex, setSex] = useState();
-    const [mother_name, setMotherName] = useState();
-    const [mother_id_no, setMotherIdNo] = useState();
-    const [mother_phone, setMotherPhone] = useState();
-    const [location, setLocation] = useState();
-    const [dob, setDob] = useState();
+    const UPDATE_ENDPOINT = "http://localhost:8083/api/v1/health_care/update_child_info";
+    const { childId } = useParams();
     const navigate = useNavigate();
 
-    const payload = {
-        firstname: firstname,
-        lastname: lastname,
-        sex: sex,
-        mother_name: mother_name,
-        mother_id_no: mother_id_no,
-        mother_phone: mother_phone,
-        location: location,
-        dob: dob,
+    const [childInfo, setChildInfo] = useState({
+        firstname: '',
+        lastname: '',
+        sex: '',
+        mother_name: '',
+        mother_id_no: '',
+        mother_phone_no: '',
+        location: '',
+        dob: ''
+    });
+
+    useEffect(() => {
+        // Fetch child information based on childId
+        fetch(`http://localhost:8083/api/v1/health_care/child/${childId}`)
+            .then(response => response.json())
+            .then(data => {
+                setChildInfo(data); // Set childInfo state with fetched data
+            })
+            .catch(error => console.error('Error fetching child information:', error));
+    }, [childId]);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setChildInfo(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     }
 
-    const handleUpdateChildInfo = (childId) => {
-        fetch(UPDATE_ENDPOINT + `${childId}`, {
-            method: "put"
+    const handleUpdateChildInfo = () => {
+        fetch(`${UPDATE_ENDPOINT}/${childId}`, {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(childInfo)
         })
-        .then(response => response.json())
-        .then(json => {
-            console.log(json)
+        .then(response => {
+            if (response.ok) {
+                alert("Child information updated successfully");
+                navigate('/children_table'); // Navigate back to children table
+            } else {
+                throw new Error("Failed to update child information");
+            }
         })
-        .catch(err => {
-            console.log(err);
-        })
+        .catch(error => console.error('Error updating child information:', error));
     }
     
 
     return (
         <main className="main-container">
             <div className="container">
-                <div className="title">Update Child Details + </div>
-                <form action="#">
+                <div className="title">Update Child Details</div>
+                <form>
                     <div className="user-details">
                         <div className="input-box">
                             <span className="details">First Name</span>
-                            <input type="text" onChange={(e => setFirstname(e.target.value))} placeholder="First Name"/>
+                            <input type="text" name="firstname" value={childInfo.firstname} onChange={handleInputChange} placeholder="First Name"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Last Name</span>
-                            <input type="text" onChange={(e => setLastname(e.target.value))} placeholder="Last Name"/>
+                            <input type="text" name="lastname" value={childInfo.lastname} onChange={handleInputChange} placeholder="Last Name"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Date of Birth</span>
-                            <input type="text" onChange={(e => setDob(e.target.value))} placeholder="Date of Birth"/>
-                            {/* <MyDatePicker /> */}
+                            <input type="text" name="dob" value={childInfo.dob} onChange={handleInputChange} placeholder="Date of Birth"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Sex</span>
-                            <input type="text" onChange={(e => setSex(e.target.value))} placeholder="Sex"/>
+                            <input type="text" name="sex" value={childInfo.sex} onChange={handleInputChange} placeholder="Sex"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Mother's Last Name</span>
-                            <input type="text" onChange={(e => setMotherName(e.target.value))} placeholder="Mother's Last Name"/>
+                            <input type="text" name="mother_name" value={childInfo.mother_name} onChange={handleInputChange} placeholder="Mother's Last Name"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Mother's ID No</span>
-                            <input type="text" onChange={(e => setMotherIdNo(e.target.value))} placeholder="Mother's ID No"/>
+                            <input type="text" name="mother_id_no" value={childInfo.mother_id_no} onChange={handleInputChange} placeholder="Mother's ID No"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Mother's Phone No</span>
-                            <input type="text" onChange={(e => setMotherPhone(e.target.value))} placeholder="Mother's Phone No"/>
+                            <input type="text" name="mother_phone_no" value={childInfo.mother_phone_no} onChange={handleInputChange} placeholder="Mother's Phone No"/>
                         </div>
                         <div className="input-box">
                             <span className="details">Location</span>
-                            <input type="text" onChange={(e => setLocation(e.target.value))} placeholder="Location"/>
+                            <input type="text" name="location" value={childInfo.location} onChange={handleInputChange} placeholder="Location"/>
                         </div>
                     </div>
                     <div className="button">
-                        <input type="submit" onClick={handleUpdateChildInfo} value="Submit" />
+                        <input type="button" onClick={handleUpdateChildInfo} value="Submit" />
                     </div>
                 </form>
             </div>
@@ -90,4 +104,4 @@ function UpdateChild(){
     )
 }
 
-export default UpdateChild
+export default UpdateChild;

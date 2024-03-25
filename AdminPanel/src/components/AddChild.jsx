@@ -11,7 +11,7 @@ function AddChild(){
     const [sex, setSex] = useState();
     const [mother_name, setMotherName] = useState();
     const [mother_id_no, setMotherIdNo] = useState();
-    const [mother_phone, setMotherPhone] = useState();
+    const [mother_phone_no, setMotherPhone] = useState();
     const [location, setLocation] = useState();
     const [dob, setDob] = useState();
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ function AddChild(){
             sex: sex,
             mother_name: mother_name,
             mother_id_no: mother_id_no,
-            mother_phone: mother_phone,
+            mother_phone_no: mother_phone_no,
             location: location,
             dob: dob
         }

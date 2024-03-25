@@ -13,6 +13,7 @@ import VaccineTablePage from "./VaccineTablePage";
 import LogoutPage from "./LogoutPage";
 import SettingsPage from "./SettingsPage";
 import UpdateChildPage from "./UpdateChildPage";
+import UpdateVaccinePage from "./UpdateVaccinePage";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -56,12 +57,16 @@ const Routes = () => {
             element: <AddChildPage />,
           },
           {
-            path: "/vaccine",
+            path: "/add_vaccine",
             element: <VaccinePage />,
           },
           {
-            path: "/update_child",
+            path: "/update_child/:childId",
             element: <UpdateChildPage />,
+          },
+          {
+            path: "/update_vaccine/:vaccineId",
+            element: <UpdateVaccinePage />,
           },
           {
             path: "/settings",
