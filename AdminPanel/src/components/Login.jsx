@@ -66,7 +66,7 @@ function Login(){
                     <div className="button">
                         <input type="submit" onClick={handleLogin} value="Login" />
                     </div>
-                    <a href="#">Forgot Password?</a>
+                    <a href="/settings">Forgot Password?</a>
                     <p>Don't have an account?</p>
                     <a href="/signup">Sign up</a>
                     <p>Or login with:</p>

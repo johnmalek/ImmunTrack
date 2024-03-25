@@ -11,6 +11,10 @@ function Settings(){
                 <form action="#">
                     <div className="user-details">
                         <div className="input-box">
+                            <span className="details">Email</span>
+                            <input type="text" placeholder="Email"/>
+                        </div>
+                        <div className="input-box">
                             <span className="details">New Password</span>
                             <input type="text" placeholder="New Password"/>
                         </div>
