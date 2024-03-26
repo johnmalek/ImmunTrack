@@ -51,7 +51,9 @@ function ChildrenTable(){
         <>
             <main className='main-container'>
                 <div className='table-wrapper'>
-                    <div className="title">Children</div>
+                    <div className="title">Children
+                        <button className="add-child-btn" onClick={() => navigate("/add_child")}>Add child</button>
+                    </div>
                     <table className='table'>
                         <thead>
                             <tr>

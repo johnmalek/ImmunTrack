@@ -11,6 +11,23 @@ body {
   color: red;
 }
 
+.add-child-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none; 
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 200px;
+}
+
+.add-child-btn:hover {
+  background-color: #0056b3;
+}
+
 /* icon */
 
 .icon {

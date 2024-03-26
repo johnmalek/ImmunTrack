@@ -51,7 +51,9 @@ function VaccineTable() {
         <>
             <main className='main-container'>
                 <div className='table-wrapper'>
-                    <div className="title">Vaccines Inventory</div>
+                <div className="title">Vaccines
+                        <button className="add-child-btn" onClick={() => navigate("/add_vaccine")}>Add Vaccine</button>
+                    </div>
                     <table className='table'>
                         <thead>
                             <tr>
