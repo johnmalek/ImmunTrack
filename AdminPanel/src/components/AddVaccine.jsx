@@ -48,6 +48,12 @@ function AddVaccine(){
             errors.expiryDate = "Expiry Date is required";
         } else if (!/^\d{4}-\d{2}-\d{2}$/.test(expiryDate)) {
             errors.dob = "Date must be in YYYY-mm-DD format";
+        } else {
+            const currentDate = new Date();
+            const inputDate = new Date(expiryDate);
+            if (inputDate < currentDate) {
+                errors.expiryDate = "Expiry date cannot be a date in the past";
+            }
         }
 
 
